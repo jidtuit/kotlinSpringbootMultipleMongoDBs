@@ -1,3 +1,7 @@
+# Custom
+dbs/
+
+# Gradle
 .gradle
 build/
 out/
