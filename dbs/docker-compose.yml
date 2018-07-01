@@ -1,0 +1,10 @@
+version: "3"
+services:
+  db1:
+    image: mongo:3.4.15-jessie
+    ports:
+      - "27017:27017"
+  db2:
+    image: mongo:3.4.15-jessie
+    ports:
+      - "27018:27017"
