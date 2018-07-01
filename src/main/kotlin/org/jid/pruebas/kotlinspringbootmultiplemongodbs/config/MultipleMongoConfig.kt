@@ -42,13 +42,13 @@ class MultipleMongoConfig(private val props: MultipleMongoProperties) {
 
 
 @Configuration
-@EnableMongoRepositories(basePackages = ["org.jid.pruebas.kotlinspringbootmultiplemongodbs.db1.repo"],
+@EnableMongoRepositories(basePackages = ["org.jid.pruebas.kotlinspringbootmultiplemongodbs.db1"],
         mongoTemplateRef = "db1MongoTemplate")
 class Db1MongoConfig
 
 
 @Configuration
-@EnableMongoRepositories(basePackages = ["org.jid.pruebas.kotlinspringbootmultiplemongodbs.db2.repo"],
+@EnableMongoRepositories(basePackages = ["org.jid.pruebas.kotlinspringbootmultiplemongodbs.db2", "org.jid.pruebas.kotlinspringbootmultiplemongodbs.db1.repotoadifferentdb"],
         mongoTemplateRef = "db2MongoTemplate")
 class Db2MongoConfig
 

@@ -1,8 +1,12 @@
 package org.jid.pruebas.kotlinspringbootmultiplemongodbs
 
 import org.jid.pruebas.kotlinspringbootmultiplemongodbs.db1.model.Metric1
+import org.jid.pruebas.kotlinspringbootmultiplemongodbs.db1.model.Metric4
+import org.jid.pruebas.kotlinspringbootmultiplemongodbs.db1.repotoadifferentdb.Repo4
 import org.jid.pruebas.kotlinspringbootmultiplemongodbs.db1.repo.Repo1
+import org.jid.pruebas.kotlinspringbootmultiplemongodbs.db2.anotherRepo.Repo3
 import org.jid.pruebas.kotlinspringbootmultiplemongodbs.db2.model.Metric2
+import org.jid.pruebas.kotlinspringbootmultiplemongodbs.db2.model.Metric3
 import org.jid.pruebas.kotlinspringbootmultiplemongodbs.db2.repo.Repo2
 import org.junit.Assert
 import org.junit.Before
@@ -21,6 +25,12 @@ class MultipleRealMongoDBsTests {
 
 	@Autowired
 	lateinit var repo2: Repo2
+
+	@Autowired
+	lateinit var repo3: Repo3
+
+	@Autowired
+	lateinit var repo4: Repo4
 
 	@Test
 	fun mongoDb1Test() {
@@ -42,6 +52,32 @@ class MultipleRealMongoDBsTests {
 		repo2.save(metric)
 
 		val findAll = repo2.findAll()
+
+		Assert.assertEquals(1, findAll.size)
+		Assert.assertEquals(metric, findAll.first())
+	}
+
+
+	@Test
+	fun mongoDb2_AnotherRepo_Test() {
+
+		val metric = Metric3("id1", "metric3", 3.3)
+		repo3.save(metric)
+
+		val findAll = repo3.findAll()
+
+		Assert.assertEquals(1, findAll.size)
+		Assert.assertEquals(metric, findAll.first())
+	}
+
+
+	@Test
+	fun mongoDb2_InDB1Namespace_Test() {
+
+		val metric = Metric4("id1", "metric4", 4.4)
+		repo4.save(metric)
+
+		val findAll = repo4.findAll()
 
 		Assert.assertEquals(1, findAll.size)
 		Assert.assertEquals(metric, findAll.first())
@@ -71,6 +107,7 @@ class MultipleRealMongoDBsTests {
 	fun setup() {
 		repo1.deleteAll()
 		repo2.deleteAll()
+		repo3.deleteAll()
 	}
 
 }
