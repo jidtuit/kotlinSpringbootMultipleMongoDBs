@@ -108,6 +108,7 @@ class MultipleRealMongoDBsTests {
 		repo1.deleteAll()
 		repo2.deleteAll()
 		repo3.deleteAll()
+		repo4.deleteAll()
 	}
 
 }
